@@ -114,3 +114,26 @@ async function getAllActresses() : Promise<Actress[] | null> {
 }
 
 getAllActresses().then(actresses => console.log(actresses))
+
+
+
+// 📌 Milestone 5
+// Crea una funzione getActresses che riceve un array di numeri (gli id delle attrici).
+
+// Per ogni id nell’array, usa la funzione getActress che hai creato nella Milestone 3 per recuperare l’attrice corrispondente.
+
+// L'obiettivo è ottenere una lista di risultati in parallelo, quindi dovrai usare Promise.all.
+
+// La funzione deve restituire un array contenente elementi di tipo Actress oppure null (se l’attrice non è stata trovata).
+
+
+
+async function getActresses(idActress: number[]): Promise<(Actress | null)[]> {
+
+  const promesse = idActress.map(act => getActress(act))
+  const risultati = await Promise.all(promesse)
+  return risultati
+}
+
+
+getActresses([1, 2, 3]).then(risultati => console.log(risultati))
